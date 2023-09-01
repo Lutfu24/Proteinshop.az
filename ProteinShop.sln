@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProteinShop.Entities", "ProteinShop.Entities\ProteinShop.Entities.csproj", "{B303B05C-D92F-4759-B1D6-DCA9F5CC49A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProteinShop.Entities", "ProteinShop.Entities\ProteinShop.Entities.csproj", "{B303B05C-D92F-4759-B1D6-DCA9F5CC49A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProteinShop.DataAccessLayer", "ProteinShop.DataAccessLayer\ProteinShop.DataAccessLayer.csproj", "{9E4A79C7-A549-483E-87A4-6CA9951D2E85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProteinShop.DataAccessLayer", "ProteinShop.DataAccessLayer\ProteinShop.DataAccessLayer.csproj", "{9E4A79C7-A549-483E-87A4-6CA9951D2E85}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{51074B67-A9C7-4DF7-8E9E-D025ED022E0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{51074B67-A9C7-4DF7-8E9E-D025ED022E0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProteinShop.Business", "ProteinShop.Business\ProteinShop.Business.csproj", "{E2701627-5C77-4F9D-BF74-662563FBCD9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProteinShop.Business", "ProteinShop.Business\ProteinShop.Business.csproj", "{E2701627-5C77-4F9D-BF74-662563FBCD9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{D8080ED8-C3FB-4939-8307-12FFEC8CE4F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{E2701627-5C77-4F9D-BF74-662563FBCD9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2701627-5C77-4F9D-BF74-662563FBCD9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2701627-5C77-4F9D-BF74-662563FBCD9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8080ED8-C3FB-4939-8307-12FFEC8CE4F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8080ED8-C3FB-4939-8307-12FFEC8CE4F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8080ED8-C3FB-4939-8307-12FFEC8CE4F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8080ED8-C3FB-4939-8307-12FFEC8CE4F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

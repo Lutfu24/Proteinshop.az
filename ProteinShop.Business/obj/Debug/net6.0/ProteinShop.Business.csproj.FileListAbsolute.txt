@@ -1,0 +1,12 @@
+C:\Users\99451\source\repos\ProteinShop\ProteinShop.Business\bin\Debug\net6.0\ProteinShop.Business.deps.json
+C:\Users\99451\source\repos\ProteinShop\ProteinShop.Business\bin\Debug\net6.0\ProteinShop.Business.dll
+C:\Users\99451\source\repos\ProteinShop\ProteinShop.Business\bin\Debug\net6.0\ProteinShop.Business.pdb
+C:\Users\99451\source\repos\ProteinShop\ProteinShop.Business\obj\Debug\net6.0\ProteinShop.Business.csproj.AssemblyReference.cache
+C:\Users\99451\source\repos\ProteinShop\ProteinShop.Business\obj\Debug\net6.0\ProteinShop.Business.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\99451\source\repos\ProteinShop\ProteinShop.Business\obj\Debug\net6.0\ProteinShop.Business.AssemblyInfoInputs.cache
+C:\Users\99451\source\repos\ProteinShop\ProteinShop.Business\obj\Debug\net6.0\ProteinShop.Business.AssemblyInfo.cs
+C:\Users\99451\source\repos\ProteinShop\ProteinShop.Business\obj\Debug\net6.0\ProteinShop.Business.csproj.CoreCompileInputs.cache
+C:\Users\99451\source\repos\ProteinShop\ProteinShop.Business\obj\Debug\net6.0\ProteinShop.Business.dll
+C:\Users\99451\source\repos\ProteinShop\ProteinShop.Business\obj\Debug\net6.0\refint\ProteinShop.Business.dll
+C:\Users\99451\source\repos\ProteinShop\ProteinShop.Business\obj\Debug\net6.0\ProteinShop.Business.pdb
+C:\Users\99451\source\repos\ProteinShop\ProteinShop.Business\obj\Debug\net6.0\ref\ProteinShop.Business.dll

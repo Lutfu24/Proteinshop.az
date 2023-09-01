@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProteinShop.Entities.Concrete;
+using System.Reflection;
 
 namespace ProteinShop.DataAccessLayer.Persistance.Context.EfCore;
 
@@ -20,4 +21,9 @@ public class AppDbContext:DbContext
 	public DbSet<ProductImages> ProductImages { get; set; } = null!;
 	public DbSet<SportsEquipments> SportsEquipments { get; set; } = null!;
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+		modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        base.OnModelCreating(modelBuilder);
+    }
 }
