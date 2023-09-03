@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ProteinShop.DataAccessLayer.Abstract;
+using ProteinShop.DataAccessLayer.Concrete;
 using ProteinShop.DataAccessLayer.Persistance.Context.EfCore;
 using ProteinShop.DataAccessLayer.Persistance.Interceptors;
 
@@ -16,6 +18,7 @@ public static class DataAccessConfiguration
 		});
 		services.AddHttpContextAccessor();
 		services.AddScoped<BaseAuditableEntityInterceptor>();
+		services.AddScoped<IProductRepository, ProductRepository>();
 		return services;
 	}
 }

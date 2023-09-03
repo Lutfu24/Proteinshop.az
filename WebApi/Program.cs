@@ -1,3 +1,4 @@
+using ProteinShop.Business;
 using ProteinShop.DataAccessLayer;
 namespace WebApi
 {
@@ -9,8 +10,10 @@ namespace WebApi
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers().AddNewtonsoftJson(op =>
+            op.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             builder.Services.AddDataAccessServices(builder.Configuration);
+            builder.Services.AddBusinessServices();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

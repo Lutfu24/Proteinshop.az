@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ProteinShop.DataAccessLayer.Persistance.Interceptors;
 using ProteinShop.Entities.Concrete;
 using System.Reflection;
 
@@ -6,9 +7,13 @@ namespace ProteinShop.DataAccessLayer.Persistance.Context.EfCore;
 
 public class AppDbContext:DbContext
 {
-	public AppDbContext(DbContextOptions<AppDbContext> op) : base(op){}
+	private readonly BaseAuditableEntityInterceptor _baseAuditableEntityInterceptor;
+    public AppDbContext(DbContextOptions<AppDbContext> op, BaseAuditableEntityInterceptor baseAuditableEntityInterceptor) : base(op)
+    {
+        _baseAuditableEntityInterceptor = baseAuditableEntityInterceptor;
+    }
 
-	public DbSet<Product> Products { get; set; } = null!;
+    public DbSet<Product> Products { get; set; } = null!;
 	public DbSet<Brand> Brands { get; set; } = null!;
 	public DbSet<Image> Images { get; set; } = null!;
 	public DbSet<Accessories> Accessories { get; set; } = null!;
@@ -25,5 +30,12 @@ public class AppDbContext:DbContext
     {
 		modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         base.OnModelCreating(modelBuilder);
+    }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.AddInterceptors(_baseAuditableEntityInterceptor);
+        optionsBuilder.UseSqlServer(@"Server=LAPTOP-9SQPT65L;Database=ProteinShopDb;Trusted_Connection=true;");
+        base.OnConfiguring(optionsBuilder);
     }
 }

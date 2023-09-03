@@ -564,6 +564,9 @@
         }
       },
       "Core/1.0.0": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "6.0.21"
+        },
         "runtime": {
           "Core.dll": {}
         }
