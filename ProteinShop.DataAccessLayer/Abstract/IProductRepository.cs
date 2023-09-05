@@ -1,4 +1,4 @@
-﻿using Core.Utilities.DataAccess.Abstract;
+﻿using Core.DataAccess.Abstract;
 using ProteinShop.Entities.Concrete;
 using System.Linq.Expressions;
 

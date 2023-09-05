@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Core.Utilities.Results.Abstract;
+using Core.Utilities.Results.Concrete;
 using ProteinShop.Business.Abstract;
 using ProteinShop.DataAccessLayer.Abstract;
 using ProteinShop.Entities.Concrete;
@@ -17,54 +19,60 @@ public class ProductService : IProductService
         _mapper = mapper;
     }
 
-    public async Task AddAsync(ProductCreateDto productCreateDto)
+    public async Task<IResult> AddAsync(ProductCreateDto productCreateDto)
     {
         Product product = _mapper.Map<Product>(productCreateDto);
-        if (product is not null)
+        if (product is null)
         {
-            await _productRepository.AddAsync(product);
+            return new ErrorResult(false, "not added");
         }
+        await _productRepository.AddAsync(product);
+        return new SuccessResult(true, "Added");
     }
 
-    public async Task DeleteAsync(Product product)
+    public async Task<IResult> DeleteAsync(Product product)
     {
-        if (product is not null)
+        if (product is null)
         {
-            await _productRepository.DeleteAsync(product);
+            return new ErrorResult(false,"not deleted");
         }
+        await _productRepository.DeleteAsync(product);
+
+        return new SuccessResult(true,"Deleted");
     }
 
-    public async Task DeleteByIdAsync(int id)
+    public async Task<IResult> DeleteByIdAsync(int id)
     {
-        ProductGetDto productGetDto = await GetByIdAsync(id);
-        Product product = _mapper.Map<Product>(productGetDto);
-        if (product is not null)
-        {
-            await _productRepository.DeleteAsync(product);
-        }
+        //    ProductGetDto productGetDto = await GetByIdAsync(id);
+        //    Product product = _mapper.Map<Product>(productGetDto);
+        //    if (product is not null)
+        //    {
+        //        await _productRepository.DeleteAsync(product);
+        //    }
+        return null;
     }
 
-    public async Task<List<ProductGetDto>> GetAllAsync()
+    public async Task<IDataResult<List<ProductGetDto>>> GetAllAsync()
     {
         List<Product> products = await _productRepository.GetAllAsync(includes: new string[] { "Brand" });
 
-        return _mapper.Map<List<ProductGetDto>>(products);
-        
+        return new SuccessDataResult<List<ProductGetDto>>(_mapper.Map<List<ProductGetDto>>(products), "Products listed");
+
     }
 
-    public async Task<ProductGetDto> GetByIdAsync(int id)
+    public async Task<IDataResult<ProductGetDto>> GetByIdAsync(int id)
     {
         Product product = await _productRepository.GetAsync(p => p.Id == id, new string[] { "Brand" });
 
-        return _mapper.Map<ProductGetDto>(product);
+        return new SuccessDataResult<ProductGetDto>(_mapper.Map<ProductGetDto>(product), true);
     }
 
-    public async Task<bool> IsExistsByIdAsync(int id)
+    public async Task<IDataResult<bool>> IsExistsByIdAsync(int id)
     {
-        return await _productRepository.IsExistsAsync(p => p.Id == id);
+        return new SuccessDataResult<bool>(await _productRepository.IsExistsAsync(p => p.Id == id));
     }
 
-    public async Task UpdateAsync(ProductUpdateDto productUpdateDto)
+    public async Task<IResult> UpdateAsync(ProductUpdateDto productUpdateDto)
     {
         Product existsProduct = await _productRepository.GetAsync(p => p.Id == productUpdateDto.Id);
 
@@ -73,5 +81,6 @@ public class ProductService : IProductService
             Product product = _mapper.Map(productUpdateDto, existsProduct);
             await _productRepository.UpdateAsync(product);
         }
+        return new SuccessResult(true, "Updated");
     }
 }

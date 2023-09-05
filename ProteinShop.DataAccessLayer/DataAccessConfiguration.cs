@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Core.Entities.Concrete.Auth;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ProteinShop.DataAccessLayer.Abstract;
@@ -19,6 +21,15 @@ public static class DataAccessConfiguration
 		services.AddHttpContextAccessor();
 		services.AddScoped<BaseAuditableEntityInterceptor>();
 		services.AddScoped<IProductRepository, ProductRepository>();
+		services.AddIdentity<AppUser, IdentityRole>(op =>
+		{
+			op.User.RequireUniqueEmail = true;
+
+			op.Password.RequiredLength = 8;
+
+			op.Lockout.MaxFailedAccessAttempts = 5;
+			op.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1);
+		}).AddDefaultTokenProviders().AddEntityFrameworkStores<AppDbContext>();
 		return services;
 	}
 }

@@ -1,16 +1,17 @@
-﻿using ProteinShop.Entities.Concrete;
+﻿using Core.Utilities.Results.Abstract;
+using ProteinShop.Entities.Concrete;
 using ProteinShop.Entities.Dtos.Product;
 
 namespace ProteinShop.Business.Abstract;
 
 public interface IProductService
 {
-    Task<List<ProductGetDto>> GetAllAsync();
-    Task<ProductGetDto> GetByIdAsync(int id);
-    Task AddAsync(ProductCreateDto productCreateDto);
-    Task UpdateAsync(ProductUpdateDto productUpdateDto);
-    Task DeleteByIdAsync(int id);
-    Task DeleteAsync(Product product);
-    Task<bool> IsExistsByIdAsync(int id);
+    Task<IDataResult<List<ProductGetDto>>> GetAllAsync();
+    Task<IDataResult<ProductGetDto>> GetByIdAsync(int id);
+    Task<IResult> AddAsync(ProductCreateDto productCreateDto);
+    Task<IResult> UpdateAsync(ProductUpdateDto productUpdateDto);
+    Task<IResult> DeleteByIdAsync(int id);
+    Task<IResult> DeleteAsync(Product product);
+    Task<IDataResult<bool>> IsExistsByIdAsync(int id);
 
 }

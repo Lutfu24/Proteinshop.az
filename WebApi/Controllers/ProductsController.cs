@@ -1,13 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProteinShop.Business.Abstract;
-using ProteinShop.Entities.Concrete;
 using ProteinShop.Entities.Dtos.Product;
 
 namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;
@@ -21,7 +21,7 @@ namespace WebApi.Controllers
         public async Task<IActionResult> GetAll()
         {
             var result = await _productService.GetAllAsync();
-            if (result.Count>0)
+            if (result.Success)
             {
                 return Ok(result);
             }
@@ -30,9 +30,12 @@ namespace WebApi.Controllers
         [HttpPost("Add")]
         public async Task<IActionResult> Add(ProductCreateDto productCreateDto)
         {
-            await _productService.AddAsync(productCreateDto);
-            return Ok();
-            
+            var result = await _productService.AddAsync(productCreateDto);
+            if (result.Success)
+            {
+                return Ok();
+            }
+            return BadRequest();
         }
     }
 }

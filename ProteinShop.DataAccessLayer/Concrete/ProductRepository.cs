@@ -1,4 +1,4 @@
-﻿using Core.Utilities.DataAccess.Concrete.EfCore;
+﻿using Core.DataAccess.Concrete.EfCore;
 using Microsoft.EntityFrameworkCore;
 using ProteinShop.DataAccessLayer.Abstract;
 using ProteinShop.DataAccessLayer.Persistance.Context.EfCore;

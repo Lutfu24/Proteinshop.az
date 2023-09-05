@@ -1,4 +1,4 @@
-﻿using Core.Utilities.Entities.Abstract;
+﻿using Core.Entities.Abstract;
 using ProteinShop.Entities.Concrete;
 
 namespace ProteinShop.Entities.Dtos.Brand;
