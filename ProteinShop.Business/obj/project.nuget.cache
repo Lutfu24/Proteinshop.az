@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Ma7rsOGxY6k+E9O+AC5RXY86iGAemvxXz0T6LizeZfQdZKmpl9aYmnsGg9XIwhn/dKk1vsFYsFLwNmVyJrWuDw==",
+  "dgSpecHash": "0C6jajCMhmSPovD5ZwqzSL6y9+7wt2Cm/mBhEPTAPmeZ3bN1aHiy2Sdglq7L8HNo6TyMrjQPxFTCq1zxoHah5A==",
   "success": true,
   "projectFilePath": "C:\\Users\\99451\\source\\repos\\ProteinShop\\ProteinShop.Business\\ProteinShop.Business.csproj",
   "expectedPackageFiles": [
@@ -59,6 +59,7 @@
     "C:\\Users\\99451\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\99451\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\99451\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
+    "C:\\Users\\99451\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\99451\\.nuget\\packages\\system.buffers\\4.5.0\\system.buffers.4.5.0.nupkg.sha512",
     "C:\\Users\\99451\\.nuget\\packages\\system.collections.immutable\\6.0.0\\system.collections.immutable.6.0.0.nupkg.sha512",
     "C:\\Users\\99451\\.nuget\\packages\\system.configuration.configurationmanager\\4.7.0\\system.configuration.configurationmanager.4.7.0.nupkg.sha512",

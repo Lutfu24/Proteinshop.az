@@ -1,3 +1,5 @@
+using Core.Utilities.Extensions;
+using Core.Utilities.Middlewares;
 using Core.Utilities.Security.Encrypting;
 using Core.Utilities.Security.JWT;
 using FluentValidation.AspNetCore;
@@ -69,6 +71,7 @@ namespace WebApi
         }
     });
             });
+            builder.Services.AddTransient<GlobalExceptionHandlerMiddleware>();
 
             var app = builder.Build();
 
@@ -78,7 +81,7 @@ namespace WebApi
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+            app.UseGlobalExceptionHandler();
             app.UseAuthentication();
             app.UseAuthorization();
 
