@@ -8,4 +8,5 @@ public class Blog:BaseAuditableEntity
     public string Description { get; set; }
     public int BlogNameId { get; set; }
     public BlogName BlogName { get; set; }
+    public List<BlogImage> BlogImages { get; set; }
 }

@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using ProteinShop.Entities.Dtos.Product;
+using ProteinShop.Entities.Dtos.ProductDto;
 
 namespace ProteinShop.Business.Utilities.Validators.Products;
 

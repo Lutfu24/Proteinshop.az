@@ -18,4 +18,5 @@ public class Product : BaseAuditableEntity
     public Brand Brand { get; set; }
     public int CatalogId { get; set; }
     public Catalog Catalog { get; set; }
+    public List<Image> Images { get; set; }
 }

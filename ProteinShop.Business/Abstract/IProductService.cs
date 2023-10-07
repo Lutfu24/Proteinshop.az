@@ -1,6 +1,6 @@
 ﻿using Core.Utilities.Results.Abstract;
 using ProteinShop.Entities.Concrete;
-using ProteinShop.Entities.Dtos.Product;
+using ProteinShop.Entities.Dtos.ProductDto;
 
 namespace ProteinShop.Business.Abstract;
 

@@ -4,7 +4,7 @@ using Core.Utilities.Results.Concrete;
 using ProteinShop.Business.Abstract;
 using ProteinShop.DataAccessLayer.Abstract;
 using ProteinShop.Entities.Concrete;
-using ProteinShop.Entities.Dtos.Product;
+using ProteinShop.Entities.Dtos.ProductDto;
 
 namespace ProteinShop.Business.Concrete;
 
@@ -54,7 +54,7 @@ public class ProductService : IProductService
 
     public async Task<IDataResult<List<ProductGetDto>>> GetAllAsync()
     {
-        List<Product> products = await _productRepository.GetAllAsync(includes: new string[] { "Brand" });
+        List<Product> products = await _productRepository.GetAllAsync(includes: new string[] { "Brand", "Catalog", "Images" });
 
         return new SuccessDataResult<List<ProductGetDto>>(_mapper.Map<List<ProductGetDto>>(products), "Products listed");
 
@@ -62,7 +62,7 @@ public class ProductService : IProductService
 
     public async Task<IDataResult<ProductGetDto>> GetByIdAsync(int id)
     {
-        Product product = await _productRepository.GetAsync(p => p.Id == id, new string[] { "Brand" });
+        Product product = await _productRepository.GetAsync(p => p.Id == id, new string[] { "Brand", "Catalog", "Images" });
 
         return new SuccessDataResult<ProductGetDto>(_mapper.Map<ProductGetDto>(product), true);
     }

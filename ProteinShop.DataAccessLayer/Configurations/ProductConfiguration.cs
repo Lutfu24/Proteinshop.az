@@ -13,9 +13,9 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.Property(p => p.Description).IsRequired(false).HasMaxLength(3000);
         builder.HasCheckConstraint("CK_Price_Product", "Price between 0 and 500");
         builder.HasCheckConstraint("CK_Raiting_Product", "Raiting between 0 and 5");
-        builder.HasMany(p => p.ProductImages)
-        .WithOne(pi => pi.Product)
-            .HasForeignKey(pi => pi.ProductId)
+        builder.HasMany(p => p.Images)
+        .WithOne(i => i.Product)
+            .HasForeignKey(i => i.ProductId)
             .OnDelete(DeleteBehavior.Restrict);
     }
 }

@@ -1,15 +1,15 @@
 ﻿using AutoMapper;
 using ProteinShop.Entities.Concrete;
-using ProteinShop.Entities.Dtos.Product;
+using ProteinShop.Entities.Dtos.ProductDto;
 
 namespace ProteinShop.Business.Utilities.Profiles;
 
-public class ProductProfile:Profile
+public class ProductProfile : Profile
 {
-	public ProductProfile()
-	{
-		CreateMap<ProductGetDto, Product>().ReverseMap();
-		CreateMap<ProductCreateDto, Product>();
-		CreateMap<ProductUpdateDto, Product>();
+    public ProductProfile()
+    {
+        CreateMap<ProductGetDto, Product>().ReverseMap();
+        CreateMap<ProductCreateDto, Product>();
+        CreateMap<ProductUpdateDto, Product>();
     }
 }

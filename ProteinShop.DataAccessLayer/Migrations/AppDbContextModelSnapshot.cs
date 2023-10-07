@@ -224,7 +224,7 @@ namespace ProteinShop.DataAccessLayer.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("ProteinShop.Entities.Concrete.Accessories", b =>
+            modelBuilder.Entity("ProteinShop.Entities.Concrete.Blog", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -232,9 +232,8 @@ namespace ProteinShop.DataAccessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Comment")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("BlogNameId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -242,16 +241,11 @@ namespace ProteinShop.DataAccessLayer.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ImageId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsAvailability")
-                        .HasColumnType("bit");
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsFavorite")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("ModifiedAt")
@@ -262,24 +256,55 @@ namespace ProteinShop.DataAccessLayer.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Raiting")
-                        .HasColumnType("float");
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ImageId");
+                    b.HasIndex("BlogNameId");
 
-                    b.ToTable("Accessories");
+                    b.ToTable("Blogs");
+                });
 
-                    b.HasCheckConstraint("CK_Price_Accessories", "Price between 0 and 500");
+            modelBuilder.Entity("ProteinShop.Entities.Concrete.BlogImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.HasCheckConstraint("CK_Raiting_Accessories", "Raiting between 0 and 5");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("BlogId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Path")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlogId");
+
+                    b.ToTable("BlogImages");
+                });
+
+            modelBuilder.Entity("ProteinShop.Entities.Concrete.BlogName", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BlogNames");
                 });
 
             modelBuilder.Entity("ProteinShop.Entities.Concrete.Brand", b =>
@@ -290,7 +315,7 @@ namespace ProteinShop.DataAccessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Name")
+                    b.Property<string>("BrandName")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
@@ -300,7 +325,7 @@ namespace ProteinShop.DataAccessLayer.Migrations
                     b.ToTable("Brands");
                 });
 
-            modelBuilder.Entity("ProteinShop.Entities.Concrete.Clothes", b =>
+            modelBuilder.Entity("ProteinShop.Entities.Concrete.BrandImage", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -311,90 +336,25 @@ namespace ProteinShop.DataAccessLayer.Migrations
                     b.Property<int>("BrandId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Comment")
+                    b.Property<string>("Path")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ImageId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsAvailability")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsFavorite")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("ModifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Raiting")
-                        .HasColumnType("float");
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("BrandId");
 
-                    b.HasIndex("ImageId");
-
-                    b.ToTable("Clothes");
-
-                    b.HasCheckConstraint("CK_Price_Clothes", "Price between 0 and 500");
-
-                    b.HasCheckConstraint("CK_Raiting_Clothes", "Raiting between 0 and 5");
+                    b.ToTable("BrandImages");
                 });
 
-            modelBuilder.Entity("ProteinShop.Entities.Concrete.ExercisesPrograms", b =>
+            modelBuilder.Entity("ProteinShop.Entities.Concrete.Catalog", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(4000)
-                        .HasColumnType("nvarchar(4000)");
-
-                    b.Property<int>("ImageId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("ModifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -403,54 +363,7 @@ namespace ProteinShop.DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ImageId");
-
-                    b.ToTable("ExercisesPrograms");
-                });
-
-            modelBuilder.Entity("ProteinShop.Entities.Concrete.Healths", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(3000)
-                        .HasColumnType("nvarchar(3000)");
-
-                    b.Property<int>("ImageId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("ModifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ImageId");
-
-                    b.ToTable("Healths");
+                    b.ToTable("Catalogs");
                 });
 
             modelBuilder.Entity("ProteinShop.Entities.Concrete.Image", b =>
@@ -461,118 +374,19 @@ namespace ProteinShop.DataAccessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Path")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("Images");
-                });
-
-            modelBuilder.Entity("ProteinShop.Entities.Concrete.Nutritions", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(3000)
-                        .HasColumnType("nvarchar(3000)");
-
-                    b.Property<int>("ImageId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("ModifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ImageId");
-
-                    b.ToTable("Nutritions");
-                });
-
-            modelBuilder.Entity("ProteinShop.Entities.Concrete.OurAthletes", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("ModifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("OurAthletes");
-                });
-
-            modelBuilder.Entity("ProteinShop.Entities.Concrete.OurAthletesImages", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("ImageId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OurAthletesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ImageId");
-
-                    b.HasIndex("OurAthletesId");
-
-                    b.ToTable("OurAthletesImages");
                 });
 
             modelBuilder.Entity("ProteinShop.Entities.Concrete.Product", b =>
@@ -586,11 +400,7 @@ namespace ProteinShop.DataAccessLayer.Migrations
                     b.Property<int>("BrandId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Comment")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Count")
+                    b.Property<int>("CatalogId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
@@ -603,13 +413,22 @@ namespace ProteinShop.DataAccessLayer.Migrations
                         .HasMaxLength(3000)
                         .HasColumnType("nvarchar(3000)");
 
+                    b.Property<double>("Discount")
+                        .HasColumnType("float");
+
                     b.Property<bool>("IsAvailability")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsBestSeller")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsFavorite")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsNew")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("ModifiedAt")
@@ -632,98 +451,14 @@ namespace ProteinShop.DataAccessLayer.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("BrandId");
+
+                    b.HasIndex("CatalogId");
 
                     b.ToTable("Products");
 
                     b.HasCheckConstraint("CK_Price_Product", "Price between 0 and 500");
 
                     b.HasCheckConstraint("CK_Raiting_Product", "Raiting between 0 and 5");
-                });
-
-            modelBuilder.Entity("ProteinShop.Entities.Concrete.ProductImages", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("ImageId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ImageId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ProductImages");
-                });
-
-            modelBuilder.Entity("ProteinShop.Entities.Concrete.SportsEquipments", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("BrandId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Comment")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ImageId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsAvailability")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsFavorite")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("ModifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Raiting")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BrandId");
-
-                    b.HasIndex("ImageId");
-
-                    b.ToTable("SportsEquipments");
-
-                    b.HasCheckConstraint("CK_Price_SportsEquipments", "Price between 0 and 500");
-
-                    b.HasCheckConstraint("CK_Raiting_SportsEquipments", "Raiting between 0 and 5");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -777,86 +512,48 @@ namespace ProteinShop.DataAccessLayer.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ProteinShop.Entities.Concrete.Accessories", b =>
+            modelBuilder.Entity("ProteinShop.Entities.Concrete.Blog", b =>
                 {
-                    b.HasOne("ProteinShop.Entities.Concrete.Image", "Image")
-                        .WithMany("Accessories")
-                        .HasForeignKey("ImageId")
+                    b.HasOne("ProteinShop.Entities.Concrete.BlogName", "BlogName")
+                        .WithMany("Blogs")
+                        .HasForeignKey("BlogNameId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Image");
+                    b.Navigation("BlogName");
                 });
 
-            modelBuilder.Entity("ProteinShop.Entities.Concrete.Clothes", b =>
+            modelBuilder.Entity("ProteinShop.Entities.Concrete.BlogImage", b =>
+                {
+                    b.HasOne("ProteinShop.Entities.Concrete.Blog", "Blog")
+                        .WithMany("BlogImages")
+                        .HasForeignKey("BlogId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Blog");
+                });
+
+            modelBuilder.Entity("ProteinShop.Entities.Concrete.BrandImage", b =>
                 {
                     b.HasOne("ProteinShop.Entities.Concrete.Brand", "Brand")
-                        .WithMany("Clothes")
+                        .WithMany("BrandImages")
                         .HasForeignKey("BrandId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("ProteinShop.Entities.Concrete.Image", "Image")
-                        .WithMany("Clothes")
-                        .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.Navigation("Brand");
-
-                    b.Navigation("Image");
                 });
 
-            modelBuilder.Entity("ProteinShop.Entities.Concrete.ExercisesPrograms", b =>
+            modelBuilder.Entity("ProteinShop.Entities.Concrete.Image", b =>
                 {
-                    b.HasOne("ProteinShop.Entities.Concrete.Image", "Image")
-                        .WithMany("ExercisesPrograms")
-                        .HasForeignKey("ImageId")
+                    b.HasOne("ProteinShop.Entities.Concrete.Product", "Product")
+                        .WithMany("Images")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Image");
-                });
-
-            modelBuilder.Entity("ProteinShop.Entities.Concrete.Healths", b =>
-                {
-                    b.HasOne("ProteinShop.Entities.Concrete.Image", "Image")
-                        .WithMany("Healths")
-                        .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Image");
-                });
-
-            modelBuilder.Entity("ProteinShop.Entities.Concrete.Nutritions", b =>
-                {
-                    b.HasOne("ProteinShop.Entities.Concrete.Image", "Image")
-                        .WithMany("Nutritions")
-                        .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Image");
-                });
-
-            modelBuilder.Entity("ProteinShop.Entities.Concrete.OurAthletesImages", b =>
-                {
-                    b.HasOne("ProteinShop.Entities.Concrete.Image", "Image")
-                        .WithMany("OurAthletesImages")
-                        .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProteinShop.Entities.Concrete.OurAthletes", "OurAthletes")
-                        .WithMany("OurAthletesImages")
-                        .HasForeignKey("OurAthletesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Image");
-
-                    b.Navigation("OurAthletes");
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("ProteinShop.Entities.Concrete.Product", b =>
@@ -867,83 +564,42 @@ namespace ProteinShop.DataAccessLayer.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Brand");
-                });
-
-            modelBuilder.Entity("ProteinShop.Entities.Concrete.ProductImages", b =>
-                {
-                    b.HasOne("ProteinShop.Entities.Concrete.Image", "Image")
-                        .WithMany("ProductImages")
-                        .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("ProteinShop.Entities.Concrete.Product", "Product")
-                        .WithMany("ProductImages")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Image");
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("ProteinShop.Entities.Concrete.SportsEquipments", b =>
-                {
-                    b.HasOne("ProteinShop.Entities.Concrete.Brand", "Brand")
-                        .WithMany("SportsEquipments")
-                        .HasForeignKey("BrandId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("ProteinShop.Entities.Concrete.Image", "Image")
-                        .WithMany("SportsEquipments")
-                        .HasForeignKey("ImageId")
+                    b.HasOne("ProteinShop.Entities.Concrete.Catalog", "Catalog")
+                        .WithMany("Products")
+                        .HasForeignKey("CatalogId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Brand");
 
-                    b.Navigation("Image");
+                    b.Navigation("Catalog");
+                });
+
+            modelBuilder.Entity("ProteinShop.Entities.Concrete.Blog", b =>
+                {
+                    b.Navigation("BlogImages");
+                });
+
+            modelBuilder.Entity("ProteinShop.Entities.Concrete.BlogName", b =>
+                {
+                    b.Navigation("Blogs");
                 });
 
             modelBuilder.Entity("ProteinShop.Entities.Concrete.Brand", b =>
                 {
-                    b.Navigation("Clothes");
+                    b.Navigation("BrandImages");
 
                     b.Navigation("Products");
-
-                    b.Navigation("SportsEquipments");
                 });
 
-            modelBuilder.Entity("ProteinShop.Entities.Concrete.Image", b =>
+            modelBuilder.Entity("ProteinShop.Entities.Concrete.Catalog", b =>
                 {
-                    b.Navigation("Accessories");
-
-                    b.Navigation("Clothes");
-
-                    b.Navigation("ExercisesPrograms");
-
-                    b.Navigation("Healths");
-
-                    b.Navigation("Nutritions");
-
-                    b.Navigation("OurAthletesImages");
-
-                    b.Navigation("ProductImages");
-
-                    b.Navigation("SportsEquipments");
-                });
-
-            modelBuilder.Entity("ProteinShop.Entities.Concrete.OurAthletes", b =>
-                {
-                    b.Navigation("OurAthletesImages");
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("ProteinShop.Entities.Concrete.Product", b =>
                 {
-                    b.Navigation("ProductImages");
+                    b.Navigation("Images");
                 });
 #pragma warning restore 612, 618
         }
