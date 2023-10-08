@@ -98,7 +98,6 @@ namespace WebApi
 
             app.UseCors(op =>
             {
-                op.WithOrigins();
                 op.AllowAnyHeader();
                 op.AllowAnyMethod();
                 op.AllowAnyOrigin();

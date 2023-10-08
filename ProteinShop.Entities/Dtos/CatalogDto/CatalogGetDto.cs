@@ -7,5 +7,4 @@ public class CatalogGetDto:IDto
 {
     public int Id { get; set; }
     public string Name { get; set; }
-    public List<ProductGetDto> Products { get; set; }
 }

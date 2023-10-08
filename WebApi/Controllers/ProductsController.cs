@@ -27,6 +27,16 @@ namespace WebApi.Controllers
             }
             return BadRequest(result);
         }
+        [HttpGet("GetById")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var result = await _productService.GetByIdAsync(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
         [HttpGet("GetFilterBest")]
         public async Task<IActionResult> GetFilterBest(bool isBestSeller)
         {

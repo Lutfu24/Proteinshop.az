@@ -8,5 +8,4 @@ public class BrandImageGetDto:IDto
     public int Id { get; set; }
     public string Path { get; set; }
     public int BrandId { get; set; }
-    public BrandGetDto Brand { get; set; }
 }

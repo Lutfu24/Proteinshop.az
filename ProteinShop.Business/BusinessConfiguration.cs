@@ -12,6 +12,13 @@ public static class BusinessConfiguration
     public static IServiceCollection AddBusinessServices(this IServiceCollection services)
     {
         services.AddScoped<IProductService, ProductService>();
+        services.AddScoped<IBrandService, BrandService>();
+        services.AddScoped<IBrandImageService, BrandImageService>();
+        services.AddScoped<IBlogService, BlogService>();
+        services.AddScoped<IBlogNameService, BlogNameService>();
+        services.AddScoped<IBlogImageService, BlogImageService>();
+        services.AddScoped<IImageService, ImageService>();
+        services.AddScoped<ICatalogService, CatalogService>();
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<ITokenHelper, JWTHelper>();
         services.AddAutoMapper(Assembly.GetExecutingAssembly());

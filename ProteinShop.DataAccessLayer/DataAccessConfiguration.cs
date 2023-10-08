@@ -21,7 +21,14 @@ public static class DataAccessConfiguration
 		services.AddHttpContextAccessor();
 		services.AddScoped<BaseAuditableEntityInterceptor>();
 		services.AddScoped<IProductRepository, ProductRepository>();
-		services.AddIdentity<AppUser, IdentityRole>(op =>
+		services.AddScoped<IBrandRepository, BrandRepository>();
+		services.AddScoped<IImageRepository, ImageRepository>();
+		services.AddScoped<IBrandImageRepository, BrandImageRepository>();
+		services.AddScoped<IBlogRepository, BlogRepository>();
+		services.AddScoped<IBlogNameRepository, BlogNameRepository>();
+		services.AddScoped<IBlogImageRepository, BlogImageRepository>();
+		services.AddScoped<ICatalogRepository, CatalogRepository>();
+        services.AddIdentity<AppUser, IdentityRole>(op =>
 		{
 			op.User.RequireUniqueEmail = true;
 

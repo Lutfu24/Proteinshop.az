@@ -21,6 +21,5 @@ public class ProductGetDto:IDto
     public int BrandId { get; set; }
     public BrandGetDto Brand { get; set; }
     public int CatalogId { get; set; }
-    public Catalog Catalog { get; set; }
-    public List<Image> Images { get; set; }
+    public List<ImageGetDto> Images { get; set; }
 }
