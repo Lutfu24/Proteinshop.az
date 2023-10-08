@@ -9,5 +9,7 @@ public class CatalogProfile : Profile
     public CatalogProfile()
     {
         CreateMap<Catalog, CatalogGetDto>();
+        CreateMap<CatalogCreateDto, Catalog>();
+        CreateMap<CatalogUpdateDto, Catalog>();
     }
 }

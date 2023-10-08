@@ -9,5 +9,7 @@ public class BrandImageProfile:Profile
 	public BrandImageProfile()
 	{
 		CreateMap<BrandImage, BrandImageGetDto>();
-	}
+        CreateMap<BrandImageCreateDto, Brand>();
+        CreateMap<BrandImageUpdateDto, Brand>();
+    }
 }
