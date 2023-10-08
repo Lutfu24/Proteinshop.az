@@ -14,6 +14,17 @@ namespace WebApi
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    policy =>
+                    {
+                        policy.WithOrigins("http://localhost:5240",
+                                            "http://localhost:3000");
+                    });
+            });
+
             TokenOption tokenOption = builder.Configuration.GetSection("TokenOptions").Get<TokenOption>();
 
             // Add services to the container.
@@ -85,6 +96,13 @@ namespace WebApi
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseCors(op =>
+            {
+                op.WithOrigins();
+                op.AllowAnyHeader();
+                op.AllowAnyMethod();
+                op.AllowAnyOrigin();
+            });
 
             app.MapControllers();
 

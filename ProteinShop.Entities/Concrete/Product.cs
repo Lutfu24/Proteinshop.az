@@ -14,8 +14,8 @@ public class Product : BaseAuditableEntity
     public bool IsFavorite { get; set; }
     public bool IsBestSeller { get; set; }
     public bool IsNew { get; set; }
-    public int BrandId { get; set; }
-    public Brand Brand { get; set; }
+    public int? BrandId { get; set; }
+    public Brand? Brand { get; set; }
     public int CatalogId { get; set; }
     public Catalog Catalog { get; set; }
     public List<Image> Images { get; set; }

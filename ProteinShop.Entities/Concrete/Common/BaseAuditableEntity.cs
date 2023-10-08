@@ -6,6 +6,6 @@ public class BaseAuditableEntity:BaseEntity
     public string? CreatedBy { get; set; }
     public DateTime ModifiedAt { get; set; }
     public string? ModifiedBy { get; set; }
-    public bool IsDeleted { get; set; }
+    public bool? IsDeleted { get; set; }
 
 }

@@ -10,6 +10,8 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
     {
         builder.Property(p => p.Name).IsRequired(true).HasMaxLength(100);
         builder.Property(p => p.Price).IsRequired(true);
+        builder.Property(p => p.BrandId).IsRequired(false);
+        builder.Property(p => p.IsDeleted).IsRequired(false);
         builder.Property(p => p.Description).IsRequired(false).HasMaxLength(3000);
         builder.HasCheckConstraint("CK_Price_Product", "Price between 0 and 500");
         builder.HasCheckConstraint("CK_Raiting_Product", "Raiting between 0 and 5");

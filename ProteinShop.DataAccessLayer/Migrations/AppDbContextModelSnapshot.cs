@@ -263,7 +263,7 @@ namespace ProteinShop.DataAccessLayer.Migrations
 
                     b.HasIndex("BlogNameId");
 
-                    b.ToTable("Blogs");
+                    b.ToTable("Blogs", (string)null);
                 });
 
             modelBuilder.Entity("ProteinShop.Entities.Concrete.BlogImage", b =>
@@ -286,7 +286,7 @@ namespace ProteinShop.DataAccessLayer.Migrations
 
                     b.HasIndex("BlogId");
 
-                    b.ToTable("BlogImages");
+                    b.ToTable("BlogImages", (string)null);
                 });
 
             modelBuilder.Entity("ProteinShop.Entities.Concrete.BlogName", b =>
@@ -304,7 +304,7 @@ namespace ProteinShop.DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BlogNames");
+                    b.ToTable("BlogNames", (string)null);
                 });
 
             modelBuilder.Entity("ProteinShop.Entities.Concrete.Brand", b =>
@@ -322,7 +322,7 @@ namespace ProteinShop.DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Brands");
+                    b.ToTable("Brands", (string)null);
                 });
 
             modelBuilder.Entity("ProteinShop.Entities.Concrete.BrandImage", b =>
@@ -345,7 +345,7 @@ namespace ProteinShop.DataAccessLayer.Migrations
 
                     b.HasIndex("BrandId");
 
-                    b.ToTable("BrandImages");
+                    b.ToTable("BrandImages", (string)null);
                 });
 
             modelBuilder.Entity("ProteinShop.Entities.Concrete.Catalog", b =>
@@ -363,7 +363,7 @@ namespace ProteinShop.DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Catalogs");
+                    b.ToTable("Catalogs", (string)null);
                 });
 
             modelBuilder.Entity("ProteinShop.Entities.Concrete.Image", b =>
@@ -386,7 +386,7 @@ namespace ProteinShop.DataAccessLayer.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Images");
+                    b.ToTable("Images", (string)null);
                 });
 
             modelBuilder.Entity("ProteinShop.Entities.Concrete.Product", b =>
@@ -397,7 +397,7 @@ namespace ProteinShop.DataAccessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("BrandId")
+                    b.Property<int?>("BrandId")
                         .HasColumnType("int");
 
                     b.Property<int>("CatalogId")
@@ -454,7 +454,7 @@ namespace ProteinShop.DataAccessLayer.Migrations
 
                     b.HasIndex("CatalogId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
 
                     b.HasCheckConstraint("CK_Price_Product", "Price between 0 and 500");
 
@@ -561,8 +561,7 @@ namespace ProteinShop.DataAccessLayer.Migrations
                     b.HasOne("ProteinShop.Entities.Concrete.Brand", "Brand")
                         .WithMany("Products")
                         .HasForeignKey("BrandId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("ProteinShop.Entities.Concrete.Catalog", "Catalog")
                         .WithMany("Products")

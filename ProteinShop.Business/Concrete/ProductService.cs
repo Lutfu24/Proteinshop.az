@@ -67,6 +67,28 @@ public class ProductService : IProductService
         return new SuccessDataResult<ProductGetDto>(_mapper.Map<ProductGetDto>(product), true);
     }
 
+    public async Task<IDataResult<List<ProductGetDto>>> GetFilterBest(bool isBestSeller)
+    {
+        List<Product> products = await _productRepository.GetFilterBest(isBestSeller);
+        List<ProductGetDto> BestSellerProducts = _mapper.Map<List<ProductGetDto>>(products);
+       
+        return new SuccessDataResult<List<ProductGetDto>>(BestSellerProducts,true);
+    }
+    public async Task<IDataResult<List<ProductGetDto>>> GetFilterNew(bool isNew)
+    {
+        List<Product> products = await _productRepository.GetFilterNew(isNew);
+        List<ProductGetDto> BestSellerProducts = _mapper.Map<List<ProductGetDto>>(products);
+
+        return new SuccessDataResult<List<ProductGetDto>>(BestSellerProducts, true);
+    }
+    public async Task<IDataResult<List<ProductGetDto>>> GetFilterDiscount()
+    {
+        List<Product> products = await _productRepository.GetFilterDiscount();
+        List<ProductGetDto> BestSellerProducts = _mapper.Map<List<ProductGetDto>>(products);
+
+        return new SuccessDataResult<List<ProductGetDto>>(BestSellerProducts, true);
+    }
+
     public async Task<IDataResult<bool>> IsExistsByIdAsync(int id)
     {
         return new SuccessDataResult<bool>(await _productRepository.IsExistsAsync(p => p.Id == id));
