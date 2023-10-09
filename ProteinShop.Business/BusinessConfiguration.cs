@@ -19,6 +19,7 @@ public static class BusinessConfiguration
         services.AddScoped<IBlogImageService, BlogImageService>();
         services.AddScoped<IImageService, ImageService>();
         services.AddScoped<ICatalogService, CatalogService>();
+        services.AddScoped<ICartItemService, CartItemService>();
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<ITokenHelper, JWTHelper>();
         services.AddAutoMapper(Assembly.GetExecutingAssembly());

@@ -10,9 +10,11 @@ namespace ProteinShop.DataAccessLayer.Persistance.Context.EfCore;
 public class AppDbContext:IdentityDbContext<AppUser>
 {
 	private readonly BaseAuditableEntityInterceptor _baseAuditableEntityInterceptor;
-    public AppDbContext(DbContextOptions<AppDbContext> op, BaseAuditableEntityInterceptor baseAuditableEntityInterceptor) : base(op)
+    private readonly CartItemInterceptors _cartItemInterceptors;
+    public AppDbContext(DbContextOptions<AppDbContext> op, BaseAuditableEntityInterceptor baseAuditableEntityInterceptor, CartItemInterceptors cartItemInterceptors) : base(op)
     {
         _baseAuditableEntityInterceptor = baseAuditableEntityInterceptor;
+        _cartItemInterceptors = cartItemInterceptors;
     }
 
     public DbSet<Product> Products { get; set; } = null!;
@@ -23,6 +25,7 @@ public class AppDbContext:IdentityDbContext<AppUser>
 	public DbSet<BlogName> BlogNames { get; set; } = null!;
 	public DbSet<Catalog> Catalogs { get; set; } = null!;
 	public DbSet<BrandImage> BrandImages { get; set; } = null!;
+	public DbSet<CartItem> CartItems { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -32,7 +35,7 @@ public class AppDbContext:IdentityDbContext<AppUser>
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.AddInterceptors(_baseAuditableEntityInterceptor);
+        optionsBuilder.AddInterceptors(_baseAuditableEntityInterceptor, _cartItemInterceptors);
         optionsBuilder.UseSqlServer(@"Server=LAPTOP-9SQPT65L;Database=ProteinShopProjectDb;Trusted_Connection=true;");
         base.OnConfiguring(optionsBuilder);
     }

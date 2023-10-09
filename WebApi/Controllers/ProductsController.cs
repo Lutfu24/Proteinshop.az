@@ -7,7 +7,7 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;
@@ -73,9 +73,9 @@ namespace WebApi.Controllers
             var result = await _productService.AddAsync(productCreateDto);
             if (result.Success)
             {
-                return Ok();
+                return Ok(result);
             }
-            return BadRequest();
+            return BadRequest(result);
         }
     }
 }

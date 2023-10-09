@@ -20,7 +20,8 @@ public static class DataAccessConfiguration
 		});
 		services.AddHttpContextAccessor();
 		services.AddScoped<BaseAuditableEntityInterceptor>();
-		services.AddScoped<IProductRepository, ProductRepository>();
+		services.AddScoped<CartItemInterceptors>();
+        services.AddScoped<IProductRepository, ProductRepository>();
 		services.AddScoped<IBrandRepository, BrandRepository>();
 		services.AddScoped<IImageRepository, ImageRepository>();
 		services.AddScoped<IBrandImageRepository, BrandImageRepository>();
@@ -28,6 +29,7 @@ public static class DataAccessConfiguration
 		services.AddScoped<IBlogNameRepository, BlogNameRepository>();
 		services.AddScoped<IBlogImageRepository, BlogImageRepository>();
 		services.AddScoped<ICatalogRepository, CatalogRepository>();
+		services.AddScoped<ICartItemRepository, CartItemRepository>();
         services.AddIdentity<AppUser, IdentityRole>(op =>
 		{
 			op.User.RequireUniqueEmail = true;

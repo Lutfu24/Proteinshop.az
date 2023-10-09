@@ -263,7 +263,7 @@ namespace ProteinShop.DataAccessLayer.Migrations
 
                     b.HasIndex("BlogNameId");
 
-                    b.ToTable("Blogs", (string)null);
+                    b.ToTable("Blogs");
                 });
 
             modelBuilder.Entity("ProteinShop.Entities.Concrete.BlogImage", b =>
@@ -286,7 +286,7 @@ namespace ProteinShop.DataAccessLayer.Migrations
 
                     b.HasIndex("BlogId");
 
-                    b.ToTable("BlogImages", (string)null);
+                    b.ToTable("BlogImages");
                 });
 
             modelBuilder.Entity("ProteinShop.Entities.Concrete.BlogName", b =>
@@ -304,7 +304,7 @@ namespace ProteinShop.DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BlogNames", (string)null);
+                    b.ToTable("BlogNames");
                 });
 
             modelBuilder.Entity("ProteinShop.Entities.Concrete.Brand", b =>
@@ -322,7 +322,7 @@ namespace ProteinShop.DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Brands", (string)null);
+                    b.ToTable("Brands");
                 });
 
             modelBuilder.Entity("ProteinShop.Entities.Concrete.BrandImage", b =>
@@ -345,7 +345,49 @@ namespace ProteinShop.DataAccessLayer.Migrations
 
                     b.HasIndex("BrandId");
 
-                    b.ToTable("BrandImages", (string)null);
+                    b.ToTable("BrandImages");
+                });
+
+            modelBuilder.Entity("ProteinShop.Entities.Concrete.CartItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("ModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("CartItems");
                 });
 
             modelBuilder.Entity("ProteinShop.Entities.Concrete.Catalog", b =>
@@ -363,7 +405,7 @@ namespace ProteinShop.DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Catalogs", (string)null);
+                    b.ToTable("Catalogs");
                 });
 
             modelBuilder.Entity("ProteinShop.Entities.Concrete.Image", b =>
@@ -386,7 +428,7 @@ namespace ProteinShop.DataAccessLayer.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Images", (string)null);
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("ProteinShop.Entities.Concrete.Product", b =>
@@ -454,7 +496,7 @@ namespace ProteinShop.DataAccessLayer.Migrations
 
                     b.HasIndex("CatalogId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
 
                     b.HasCheckConstraint("CK_Price_Product", "Price between 0 and 500");
 
@@ -543,6 +585,25 @@ namespace ProteinShop.DataAccessLayer.Migrations
                         .IsRequired();
 
                     b.Navigation("Brand");
+                });
+
+            modelBuilder.Entity("ProteinShop.Entities.Concrete.CartItem", b =>
+                {
+                    b.HasOne("Core.Entities.Concrete.Auth.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProteinShop.Entities.Concrete.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("ProteinShop.Entities.Concrete.Image", b =>
