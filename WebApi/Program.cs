@@ -20,8 +20,8 @@ namespace WebApi
                 options.AddDefaultPolicy(
                     policy =>
                     {
-                        policy.WithOrigins("http://localhost:5240",
-                                            "http://localhost:3000");
+                        policy.WithOrigins("http://localhost:5240/",
+                                            "http://localhost:3000/");
                     });
             });
 
@@ -98,9 +98,9 @@ namespace WebApi
 
             app.UseCors(op =>
             {
-                op.AllowAnyHeader();
-                op.AllowAnyMethod();
-                op.AllowAnyOrigin();
+                op.AllowAnyHeader()
+                  .AllowAnyMethod()
+                  .AllowAnyOrigin();
             });
 
             app.MapControllers();

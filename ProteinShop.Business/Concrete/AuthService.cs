@@ -3,6 +3,7 @@ using Core.Entities.Concrete.Auth;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using Core.Utilities.Security.JWT;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using ProteinShop.Business.Abstract;
 using System.Security.Claims;
@@ -14,19 +15,21 @@ public class AuthService : IAuthService
     private readonly UserManager<AppUser> _userManager;
     private readonly ITokenHelper _tokenHelper;
     private readonly IMapper _mapper;
+    private readonly IHttpContextAccessor _contextAccessor;
 
-    public AuthService(UserManager<AppUser> userManager, ITokenHelper tokenHelper, IMapper mapper)
+    public AuthService(UserManager<AppUser> userManager, ITokenHelper tokenHelper, IMapper mapper, IHttpContextAccessor contextAccessor)
     {
         _userManager = userManager;
         _tokenHelper = tokenHelper;
         _mapper = mapper;
+        _contextAccessor = contextAccessor;
     }
 
     public async Task<IDataResult<AccessToken>> CreateTokenAsync(AppUser appUser)
     {
         IList<Claim> claims = await _userManager.GetClaimsAsync(appUser);
         AccessToken accessToken = _tokenHelper.CreateToken(claims.ToList());
-        return new SuccessDataResult<AccessToken>(accessToken,true);
+        return new SuccessDataResult<AccessToken>(accessToken, "Login successfully");
     }
 
     public async Task<IDataResult<AppUser>> LoginAsync(LoginDto loginDto)
@@ -38,7 +41,7 @@ public class AuthService : IAuthService
         {
             return new ErrorDataResult<AppUser>("Username or password is wrong!");
         }
-        return new SuccessDataResult<AppUser>(appUser,"Login successfully");
+        return new SuccessDataResult<AppUser>(appUser,true);
     }
 
     public async Task<IDataResult<AppUser>> RegisterAsync(RegisterDto registerDto)
@@ -73,5 +76,18 @@ public class AuthService : IAuthService
             new Claim(ClaimTypes.Email,newUser.Email),
             new Claim("FullName",newUser.FullName)
         };
+    }
+
+    public async Task<IDataResult<AppUser>> GetUserAsync(string userName)
+    {
+        bool isAuthenticated = _contextAccessor.HttpContext.User.Identity.IsAuthenticated;
+        AppUser appUser = null;
+        if (isAuthenticated)
+        {
+            appUser = _userManager.Users.FirstOrDefault(u => u.UserName == userName);
+            if (appUser is null) return null;
+        }
+
+        return new SuccessDataResult<AppUser>(appUser,true);
     }
 }

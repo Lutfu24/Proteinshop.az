@@ -1,4 +1,5 @@
 ﻿using Core.Entities.Concrete.Auth;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProteinShop.Business.Abstract;
 
@@ -34,6 +35,17 @@ namespace WebApi.Controllers
             }
             var accessToken = await _authService.CreateTokenAsync(result.Data);
             return Ok(accessToken);
+        }
+        [HttpGet("GetUser")]
+        [Authorize]
+        public async Task<IActionResult> GetUser(string userName)
+        {
+            var result = await _authService.GetUserAsync(userName);
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
         }
     }
 }

@@ -65,7 +65,7 @@ public class CartItemService : ICartItemService
             cartItems = await _cartItemRepository.GetAllAsync(includes: new string[] { "Product" });
         }
         var result = _mapper.Map<List<CartItemDetailDto>>(cartItems);
-        return new SuccessDataResult<List<CartItemDetailDto>>(result, true);
+        return new SuccessDataResult<List<CartItemDetailDto>>(result, "cart items listed");
     }
 
     public Task<IDataResult<CartItemDetailDto>> GetByIdAsync(int id)
