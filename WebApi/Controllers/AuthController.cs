@@ -1,4 +1,5 @@
-﻿using Core.Entities.Concrete.Auth;
+﻿using AutoMapper;
+using Core.Entities.Concrete.Auth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProteinShop.Business.Abstract;
@@ -10,10 +11,12 @@ namespace WebApi.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
+        private readonly IMapper _mapper;
 
-        public AuthController(IAuthService authService)
+        public AuthController(IAuthService authService, IMapper mapper)
         {
             _authService = authService;
+            _mapper = mapper;
         }
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterDto registerDto)
@@ -34,7 +37,7 @@ namespace WebApi.Controllers
                 return BadRequest(result);
             }
             var accessToken = await _authService.CreateTokenAsync(result.Data);
-            return Ok(accessToken);
+            return Ok(new {accessToken,result.Data.UserName});
         }
         [HttpGet("GetUser")]
         [Authorize]

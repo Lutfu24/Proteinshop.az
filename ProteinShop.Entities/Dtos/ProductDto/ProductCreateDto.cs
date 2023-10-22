@@ -10,6 +10,6 @@ public class ProductCreateDto : IDto
     public double Raiting { get; set; }
     public string Description { get; set; }
     public bool IsAvailability { get; set; }
-    public int BrandId { get; set; }
+    public int? BrandId { get; set; }
     public int CatalogId { get; set; }
 }

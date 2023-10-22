@@ -10,6 +10,12 @@ namespace WebApi.Controllers
     public class ImagesController : ControllerBase
     {
         private readonly IImageService _imageService;
+
+        public ImagesController(IImageService imageService)
+        {
+            _imageService = imageService;
+        }
+
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {

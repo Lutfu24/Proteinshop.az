@@ -14,6 +14,6 @@ public class ProductUpdateDto : IDto
     public bool IsFavorite { get; set; }
     public bool IsBestSeller { get; set; }
     public bool IsNew { get; set; }
-    public int BrandId { get; set; }
+    public int? BrandId { get; set; }
     public int CatalogId { get; set; }
 }

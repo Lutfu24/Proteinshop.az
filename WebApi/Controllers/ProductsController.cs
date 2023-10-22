@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ProteinShop.Business.Abstract;
 using ProteinShop.Entities.Dtos.ProductDto;
 
@@ -70,6 +69,36 @@ namespace WebApi.Controllers
         public async Task<IActionResult> Add(ProductCreateDto productCreateDto)
         {
             var result = await _productService.AddAsync(productCreateDto);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpDelete("Delete")]
+        public async Task<IActionResult> Delete(ProductDeleteDto product)
+        {
+            var result = await _productService.DeleteAsync(product);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpDelete("DeleteById")]
+        public async Task<IActionResult> DeleteById(int id)
+        {
+            var result = await _productService.DeleteByIdAsync(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpPut("Update")]
+        public async Task<IActionResult> Update(ProductUpdateDto dto)
+        {
+            var result = await _productService.UpdateAsync(dto);
             if (result.Success)
             {
                 return Ok(result);

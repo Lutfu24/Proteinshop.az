@@ -9,5 +9,5 @@ public interface IAuthService
     Task<IDataResult<AppUser>> RegisterAsync(RegisterDto registerDto);
     Task<IDataResult<AppUser>> LoginAsync(LoginDto loginDto);
     Task<IDataResult<AccessToken>> CreateTokenAsync(AppUser appUser);
-    Task<IDataResult<AppUser>> GetUserAsync(string userName);
+    Task<IDataResult<UserDto>> GetUserAsync(string userName);
 }

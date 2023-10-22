@@ -14,7 +14,7 @@ public interface IProductService
     Task<IResult> AddAsync(ProductCreateDto productCreateDto);
     Task<IResult> UpdateAsync(ProductUpdateDto productUpdateDto);
     Task<IResult> DeleteByIdAsync(int id);
-    Task<IResult> DeleteAsync(Product product);
+    Task<IResult> DeleteAsync(ProductDeleteDto product);
     Task<IDataResult<bool>> IsExistsByIdAsync(int id);
 
 }

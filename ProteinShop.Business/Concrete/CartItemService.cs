@@ -16,7 +16,7 @@ public class CartItemService : ICartItemService
     private readonly IMapper _mapper;
     private readonly IHttpContextAccessor _contextAccessor;
     private readonly IProductService _productService;
-    private readonly bool _isAuthenticated;
+    private readonly bool _isAuthenticated = false;
     private const string COOKIE_CART_ITEM_KEY = "mycartitemkey";
 
     public CartItemService(ICartItemRepository cartItemRepository, IMapper mapper, IHttpContextAccessor contextAccessor, IProductService productService)

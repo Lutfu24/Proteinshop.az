@@ -30,8 +30,9 @@ public class ProductService : IProductService
         return new SuccessResult(true, "Added");
     }
 
-    public async Task<IResult> DeleteAsync(Product product)
+    public async Task<IResult> DeleteAsync(ProductDeleteDto productdto)
     {
+        Product product = _mapper.Map<Product>(productdto);
         if (product is null)
         {
             return new ErrorResult(false,"not deleted");
@@ -43,13 +44,13 @@ public class ProductService : IProductService
 
     public async Task<IResult> DeleteByIdAsync(int id)
     {
-        //    ProductGetDto productGetDto = await GetByIdAsync(id);
-        //    Product product = _mapper.Map<Product>(productGetDto);
-        //    if (product is not null)
-        //    {
-        //        await _productRepository.DeleteAsync(product);
-        //    }
-        return null;
+        Product product = await _productRepository.GetAsync(p => p.Id == id, new string[] { "Brand", "Catalog", "Images" });
+        if (product is null)
+        {
+            return null;
+        }
+        Product newProduct = await _productRepository.DeleteAsync(product);
+        return new SuccessResult(true, "deleted");
     }
 
     public async Task<IDataResult<List<ProductGetDto>>> GetAllAsync()
@@ -96,7 +97,7 @@ public class ProductService : IProductService
 
     public async Task<IResult> UpdateAsync(ProductUpdateDto productUpdateDto)
     {
-        Product existsProduct = await _productRepository.GetAsync(p => p.Id == productUpdateDto.Id);
+        Product existsProduct = await _productRepository.GetAsync(p => p.Id == productUpdateDto.Id, new string[] { "Brand", "Catalog", "Images" });
 
         if (existsProduct is not null)
         {

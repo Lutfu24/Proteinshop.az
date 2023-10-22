@@ -78,7 +78,7 @@ public class AuthService : IAuthService
         };
     }
 
-    public async Task<IDataResult<AppUser>> GetUserAsync(string userName)
+    public async Task<IDataResult<UserDto>> GetUserAsync(string userName)
     {
         bool isAuthenticated = _contextAccessor.HttpContext.User.Identity.IsAuthenticated;
         AppUser appUser = null;
@@ -88,6 +88,8 @@ public class AuthService : IAuthService
             if (appUser is null) return null;
         }
 
-        return new SuccessDataResult<AppUser>(appUser,true);
+        UserDto user = _mapper.Map<UserDto>(appUser);
+
+        return new SuccessDataResult<UserDto>(user,true);
     }
 }
